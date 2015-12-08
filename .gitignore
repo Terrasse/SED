@@ -32,3 +32,4 @@ ChronometreMFC/ChronometreMFCppc.aps
 ChronometreMFC/ChronometreMFC.vcproj.*
 ChronometreMFC/Windows Mobile 6 Professional SDK (ARMV4I)/*
 *.ncb
+*.suo
