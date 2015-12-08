@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_EN_CHANGE(IDC_EDIT4, &CChronometreMFCDlg::OnEnChangeEdit4)
 	ON_BN_CLICKED(IDC_BUTTON1, &CChronometreMFCDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON3, &CChronometreMFCDlg::OnBnClickedButton3)
+	ON_EN_CHANGE(IDC_EDIT5, &CChronometreMFCDlg::OnEnChangeEdit5)
 END_MESSAGE_MAP()
 
 
@@ -96,7 +97,17 @@ void CChronometreMFCDlg::OnBnClickedButton1()
 void CChronometreMFCDlg::OnBnClickedButton3()
 {
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-
+	
 	// creer le thread chronomètre initilialisé aux valeurs 
 
+}
+
+void CChronometreMFCDlg::OnEnChangeEdit5()
+{
+	// TODO:  If this is a RICHEDIT control, the control will not
+	// send this notification unless you override the CDialog::OnInitDialog()
+	// function and call CRichEditCtrl().SetEventMask()
+	// with the ENM_CHANGE flag ORed into the mask.
+
+	// TODO:  Add your control notification handler code here
 }

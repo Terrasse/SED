@@ -6,9 +6,9 @@ private:
 	int v_seconde;
 
 public:
-	virtual void getHeure();
-	virtual void getMinute();
-	virtual void getSeconde();
+	virtual char* getHeure();
+	virtual char* getMinute();
+	virtual char* getSeconde();
 	virtual void start();
 	virtual void stop();
-}
+};
