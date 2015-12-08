@@ -3,7 +3,7 @@
 //
 
 #ifdef APSTUDIO_INVOKED
-#error ce fichier n'est pas modifiable par Microsoft Visual C++
+#error "ce fichier n'est pas modifiable par Microsoft Visual C++"
 #endif //APSTUDIO_INVOKED
 
 

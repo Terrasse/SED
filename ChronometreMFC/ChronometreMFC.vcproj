@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="ChronometreMFC"
 	ProjectGUID="{66D1B0AB-870F-47F4-9F93-D6541F71DA37}"
 	RootNamespace="ChronometreMFC"
@@ -251,6 +251,26 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Etape.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GPS.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Heure.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Parcourt.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Position.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resourceppc.h"
 				>
 			</File>
@@ -271,20 +291,6 @@
 			<File
 				RelativePath=".\ChronometreMFCppc.rc"
 				>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCResourceCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCResourceCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\res\ChronometreMFCppc.rc2"

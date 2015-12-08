@@ -28,11 +28,7 @@
 *.app
 
 ChronometreMFC/ChronometreMFC.aps
-ChronometreMFC/ChronometreMFC.rc
 ChronometreMFC/ChronometreMFCppc.aps
-ChronometreMFC/ChronometreMFC.vcproj.TERRY-E53BE5FC2.Administrator.user
-ChronometreMFC/Windows Mobile 6 Professional SDK (ARMV4I)/Debug/BuildLog.htm
-ChronometreMFC/Windows Mobile 6 Professional SDK (ARMV4I)/Debug/ChronometreMFC.pdb
-ChronometreMFC/Windows Mobile 6 Professional SDK (ARMV4I)/Debug/vc80.idb
-ChronometreMFC/Windows Mobile 6 Professional SDK (ARMV4I)/Debug/vc80.pdb
-ChronometreMFC.ncb
+ChronometreMFC/ChronometreMFC.vcproj.*
+ChronometreMFC/Windows Mobile 6 Professional SDK (ARMV4I)/*
+*.ncb

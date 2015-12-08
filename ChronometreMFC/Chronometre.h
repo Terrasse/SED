@@ -1,10 +1,5 @@
 // class permettant de gérer le chronomètre
-class CChronometreMFCDlg : public CDialog{
-private: 
-	int v_heure;
-	int v_minute;
-	int v_seconde;
-
+class Chronometre{
 public:
 	virtual char* getHeure();
 	virtual char* getMinute();

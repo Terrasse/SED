@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "Chronometre.h"
-char* CChronometreMFCDlg::getHeure() {
+char* Chronometre::getHeure() {
 	return "heure";
 }
-char* CChronometreMFCDlg::getMinute() {
+char* Chronometre::getMinute() {
 	return "minute";
 }
-char* CChronometreMFCDlg::getSeconde() {
+char* Chronometre::getSeconde() {
 	return "seconde";
 }
-void CChronometreMFCDlg::start() {
+void Chronometre::start() {
 }
-void CChronometreMFCDlg::stop() {
+void Chronometre::stop() {
 }
 
