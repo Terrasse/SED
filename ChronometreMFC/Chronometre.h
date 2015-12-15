@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "Heure.h"
 #include "windows.h"
+#include "iostream"
+using namespace std;
 
 class Chronometre{
 

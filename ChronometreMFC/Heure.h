@@ -1,4 +1,8 @@
 #include "windows.h"
+#include "iostream"
+#include "sstream"
+#include "string"
+using namespace std;
 
 class Heure{
 private: 
@@ -9,6 +13,8 @@ private:
 	int milliseconde;
 
 public:
+
+	Heure();
 	Heure(DWORD start, DWORD stop);
 
 	// modification des attributs
@@ -29,9 +35,9 @@ public:
 	virtual void setMilliseconde(int new_milliseconde);
 
 	// affichage 
-	virtual char* toString();
+	virtual string format();
 
 	// fonctions metier
-	virtual int diff(Heure h);
+	virtual Heure diff(Heure h);
 
 };
