@@ -18,7 +18,7 @@ using namespace std;
 
 class Chronometre{
 
-enum etat { ON = '0', OFF = '1', WAIT = '2' };
+enum etat { ON = '0', OFF = '1'};
 
 public:
 
@@ -35,7 +35,6 @@ public:
 	virtual Heure* getCurrentTime();
 	
 	virtual void start();
-	virtual void pause();
 	virtual void restart();
 	virtual void stop();
 };

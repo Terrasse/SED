@@ -13,6 +13,7 @@
 
 CChronometreMFCDlg::CChronometreMFCDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CChronometreMFCDlg::IDD, pParent)
+	, v_chrono(NULL)
 	, v_heure(0)
 	, v_minute(0)
 	, v_seconde(0)
@@ -135,11 +136,15 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
 	
 	// creer le thread chronomètre initilialisé aux valeurs 
-	if (v_chrono!=NULL){
-		v_chrono=new Chronometre();
+	if (v_chrono != NULL){
+		v_chrono->start();
 	}
-	v_chrono->start();
-	
+	else{
+		v_chrono=new Chronometre();
+		v_chrono->start();
+	}
+
+
 	// on affiche le boutton restart
 	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
 	pWnd->ShowWindow(SW_SHOW);
