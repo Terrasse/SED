@@ -3,6 +3,7 @@
 
 #include "windows.h"
 #include "Chronometre.h"
+#include "Heure.h"
 #pragma once
 
 // Boîte de dialogue CChronometreMFCDlg
