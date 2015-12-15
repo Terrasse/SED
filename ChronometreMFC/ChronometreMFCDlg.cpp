@@ -13,7 +13,7 @@
 
 CChronometreMFCDlg::CChronometreMFCDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CChronometreMFCDlg::IDD, pParent)
-	, v_chrono(NULL)
+	, v_parcours(NULL)
 	, v_heure(0)
 	, v_minute(0)
 	, v_seconde(0)
@@ -83,6 +83,7 @@ void CChronometreMFCDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 
 void CChronometreMFCDlg::OnEnChangeEdit4()
 {
+	v_parcours->tour();
 	// TODO:  S'il s'agit d'un contrôle RICHEDIT, le contrôle ne
 	// envoyez cette notification sauf si vous substituez CDialog::OnInitDialog()
 	// fonction et appelle CRichEditCtrl().SetEventMask()
@@ -96,6 +97,7 @@ void CChronometreMFCDlg::OnEnChangeEdit4()
 
 void CChronometreMFCDlg::OnEnChangeEdit5()
 {
+	v_parcours->tour();
 	// TODO:  If this is a RICHEDIT control, the control will not
 	// send this notification unless you override the CDialog::OnInitDialog()
 	// function and call CRichEditCtrl().SetEventMask()
@@ -104,15 +106,17 @@ void CChronometreMFCDlg::OnEnChangeEdit5()
 	// TODO:  Add your control notification handler code here
 }
 
-// Boutton restart
+// Bouton tour
 void CChronometreMFCDlg::OnBnClickedButton1()
 {
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-	
+	v_parcours->tour();
+	/*
 	v_chrono=new Chronometre();
+
 	doUpdate();
 	v_chrono->start();
-	UpdateData(FALSE);
+	UpdateData(FALSE);*/
 }
 
 
@@ -120,13 +124,14 @@ void CChronometreMFCDlg::OnBnClickedButton1()
 void CChronometreMFCDlg::OnBnClickedButton2()
 {
 	// TODO: Add your control notification handler code here
-	if (v_chrono!=NULL) {
-		v_chrono->stop();
+	if(v_parcours == NULL)
+		v_parcours = new Parcours();
+	v_parcours->stop();
 
-		// on hide le boutton restart
-		CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
-		pWnd->ShowWindow(SW_SHOW);
-	}
+		//// on hide le boutton restart
+		//CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
+		//pWnd->ShowWindow(SW_SHOW);
+	
 	doUpdate();
 	UpdateData(FALSE);
 }
@@ -137,13 +142,9 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
 	
 	// creer le thread chronomètre initilialisé aux valeurs 
-	if (v_chrono != NULL){
-		v_chrono->start();
-	}
-	else{
-		v_chrono=new Chronometre();
-		v_chrono->start();
-	}
+	if(v_parcours == NULL)
+		v_parcours = new Parcours();
+	v_parcours->start();
 
 
 	// on affiche le boutton restart
@@ -155,6 +156,7 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 
 void CChronometreMFCDlg::doUpdate()
 {
+	Chronometre* v_chrono = v_parcours->getChronometre();
 	if (v_chrono!=NULL) {
 		Heure* tmp_heure=v_chrono->getCurrentTime();
 		v_heure=tmp_heure->getHeure();

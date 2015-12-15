@@ -2,6 +2,7 @@
 //
 
 #include "windows.h"
+#include "Parcours.h"
 #include "Chronometre.h"
 #include "Heure.h"
 #pragma once
@@ -35,7 +36,7 @@ public:
 	int v_heure;
 	int v_minute;
 	int v_seconde;
-	Chronometre *v_chrono;
+	Parcours *v_parcours;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnEnChangeEdit4();

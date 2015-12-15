@@ -1,33 +1,29 @@
-#ifndef Parcourt_H
-#define Parcourt_H
+#ifndef Parcours_H
+#define Parcours_H
 
 #include "Etape.h"
 #include "Chronometre.h"
 using namespace std;
 
-class Parcourt {
+class Parcours {
 private :
 	Etape etape[40];
 	int current;
 	Chronometre* c;
 public : 
-	Parcourt();
+	Parcours();
 
 	// fonctions 
 	void init();
 	void start();
 	void stop();
-	void pause();
-	void restart();
 	void tour();
 
-	//Permet de récupérer l'étape i
-	string getEtape(int i){
-	}
+	Chronometre* getChronometre();
+	
 
 	//Permet de récupérer la dernière étape 
-	string getLastEtape(){
-	}
+	string getLastEtape();
 
 };
 #endif
