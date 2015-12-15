@@ -110,11 +110,8 @@ void CChronometreMFCDlg::OnBnClickedButton1()
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
 	
 	v_chrono=new Chronometre();
-	
-	// on cache le boutton restart
-	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
-	pWnd->ShowWindow(SW_HIDE);
 	doUpdate();
+	v_chrono->start();
 	UpdateData(FALSE);
 }
 
@@ -125,6 +122,10 @@ void CChronometreMFCDlg::OnBnClickedButton2()
 	// TODO: Add your control notification handler code here
 	if (v_chrono!=NULL) {
 		v_chrono->stop();
+
+		// on hide le boutton restart
+		CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
+		pWnd->ShowWindow(SW_SHOW);
 	}
 	doUpdate();
 	UpdateData(FALSE);
