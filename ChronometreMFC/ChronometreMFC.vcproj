@@ -288,6 +288,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EtatChronometre.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GPS.h"
 				>
 			</File>

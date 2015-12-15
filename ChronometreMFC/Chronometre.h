@@ -13,9 +13,12 @@ using namespace std;
 #include "stdafx.h"
 #include "Heure.h"
 #include "windows.h"
+//#include "EtatChronometre.h"
 
 
 class Chronometre{
+
+enum etat { ON = '0', OFF = '1', WAIT = '2' };
 
 public:
 
@@ -23,8 +26,12 @@ public:
 	DWORD tick_count_pause;
 	DWORD tick_count_stop;
 	
-	int current_state;
+	etat current_state;
 
+	// constructeur 
+	Chronometre();
+
+	// méthode
 	virtual Heure* getCurrentTime();
 	
 	virtual void start();

@@ -16,6 +16,7 @@ CChronometreMFCDlg::CChronometreMFCDlg(CWnd* pParent /*=NULL*/)
 	, v_heure(0)
 	, v_minute(0)
 	, v_seconde(0)
+	, v_ms(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -25,10 +26,12 @@ void CChronometreMFCDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT5, v_heure);
 	DDX_Text(pDX, IDC_EDIT4, v_minute);
+	DDX_Text(pDX, IDC_EDIT3, v_seconde);
+	DDX_Text(pDX, IDC_EDIT6, v_ms);
 	DDV_MinMaxInt(pDX, v_minute, 0, 60);
 	DDV_MinMaxInt(pDX, v_heure, 0, 24);
-	DDX_Text(pDX, IDC_EDIT3, v_seconde);
 	DDV_MinMaxInt(pDX, v_seconde, 0, 60);
+	DDV_MinMaxInt(pDX, v_ms, 0, 1000);
 }
 
 BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
@@ -40,6 +43,8 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CChronometreMFCDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON3, &CChronometreMFCDlg::OnBnClickedButton3)
 	ON_EN_CHANGE(IDC_EDIT5, &CChronometreMFCDlg::OnEnChangeEdit5)
+	ON_BN_CLICKED(IDC_BUTTON2, &CChronometreMFCDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON4, &CChronometreMFCDlg::OnBnClickedButton4)
 END_MESSAGE_MAP()
 
 
@@ -85,26 +90,8 @@ void CChronometreMFCDlg::OnEnChangeEdit4()
 	// TODO:  Ajoutez ici le code de votre gestionnaire de notification de contrôle
 }
 
-void CChronometreMFCDlg::OnBnClickedButton1()
-{
-	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-	Chronometre* tmp_chrono= new Chronometre();
-	tmp_chrono->start();
-	Sleep(2000);
-	Heure* tmp_heure=tmp_chrono->getCurrentTime();
-	v_heure=tmp_heure->getHeure();
-	v_minute=tmp_heure->getMinute();
-	v_seconde=tmp_heure->getSeconde();
-	UpdateData(FALSE);
-}
 
-void CChronometreMFCDlg::OnBnClickedButton3()
-{
-	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-	
-	// creer le thread chronomètre initilialisé aux valeurs 
 
-}
 
 void CChronometreMFCDlg::OnEnChangeEdit5()
 {
@@ -114,4 +101,65 @@ void CChronometreMFCDlg::OnEnChangeEdit5()
 	// with the ENM_CHANGE flag ORed into the mask.
 
 	// TODO:  Add your control notification handler code here
+}
+
+// Boutton restart
+void CChronometreMFCDlg::OnBnClickedButton1()
+{
+	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
+	
+	v_chrono=new Chronometre();
+	
+	// on cache le boutton restart
+	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
+	pWnd->ShowWindow(SW_HIDE);
+	doUpdate();
+	UpdateData(FALSE);
+}
+
+
+// Boutton STOP
+void CChronometreMFCDlg::OnBnClickedButton2()
+{
+	// TODO: Add your control notification handler code here
+	if (v_chrono!=NULL) {
+		v_chrono->stop();
+	}
+	doUpdate();
+	UpdateData(FALSE);
+}
+
+// Boutton START
+void CChronometreMFCDlg::OnBnClickedButton3()
+{
+	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
+	
+	// creer le thread chronomètre initilialisé aux valeurs 
+	if (v_chrono!=NULL){
+		v_chrono=new Chronometre();
+	}
+	v_chrono->start();
+	
+	// on affiche le boutton restart
+	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
+	pWnd->ShowWindow(SW_SHOW);
+	doUpdate();
+	UpdateData(FALSE);
+}
+
+void CChronometreMFCDlg::doUpdate()
+{
+	if (v_chrono!=NULL) {
+		Heure* tmp_heure=v_chrono->getCurrentTime();
+		v_heure=tmp_heure->getHeure();
+		v_minute=tmp_heure->getMinute();
+		v_seconde=tmp_heure->getSeconde();
+		v_ms=tmp_heure->getMilliseconde();
+	} 
+}
+
+void CChronometreMFCDlg::OnBnClickedButton4()
+{
+	doUpdate();
+	UpdateData(FALSE);
 }

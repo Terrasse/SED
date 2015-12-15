@@ -31,12 +31,21 @@ protected:
 #endif
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnEnChangeEdit4();
+	
 	int v_heure;
 	int v_minute;
 	int v_seconde;
+	Chronometre *v_chrono;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton3();
+	afx_msg void OnEnChangeEdit4();
 	afx_msg void OnEnChangeEdit5();
+	afx_msg void OnStartRefresh();
+	afx_msg void OnBnClickedButton2();
+	void doUpdate();
+	afx_msg void OnLbnSelchangeList3();
+	afx_msg void OnEnChangeEdit6();
+	int v_ms;
+	afx_msg void OnBnClickedButton4();
 };
 
