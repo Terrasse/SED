@@ -1,9 +1,17 @@
 // class permettant de gérer le chronomètre
+#include "stdafx.h"
+#include "Heure.h"
+#include "windows.h"
+
 class Chronometre{
+
 public:
-	virtual char* getHeure();
-	virtual char* getMinute();
-	virtual char* getSeconde();
+
+	DWORD tick_count_start;
+	DWORD tick_count_stop;
+
+	virtual Heure* getCurrentTime();
+	
 	virtual void start();
 	virtual void stop();
 };
