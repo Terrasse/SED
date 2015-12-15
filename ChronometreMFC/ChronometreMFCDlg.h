@@ -1,6 +1,8 @@
 // ChronometreMFCDlg.h : fichier d'en-tête
 //
 
+#include "windows.h"
+#include "Chronometre.h"
 #pragma once
 
 // Boîte de dialogue CChronometreMFCDlg
@@ -36,3 +38,4 @@ public:
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnEnChangeEdit5();
 };
+

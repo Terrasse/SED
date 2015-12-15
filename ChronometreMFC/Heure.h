@@ -1,3 +1,5 @@
+#ifndef Heure_H
+#define Heure_H
 #include "windows.h"
 #include "iostream"
 #include "sstream"
@@ -39,5 +41,6 @@ public:
 
 	// fonctions metier
 	virtual Heure diff(Heure h);
-
 };
+#endif
+

@@ -1,3 +1,6 @@
+#ifndef Parcourt_H
+#define Parcourt_H
+
 #include 'Etape.h'
 class Parcourt {
 private :
@@ -15,3 +18,4 @@ public :
 	String toString();
 
 };
+#endif
