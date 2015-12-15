@@ -1,4 +1,7 @@
-class Position{
+#ifndef Position_H
+#define Position_H
+
+class Position {
 private: 
 	double longitude;
 	double latitude;
@@ -16,3 +19,4 @@ public:
 	// affichage
 	virtual char* toString();
 };
+#endif

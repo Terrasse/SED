@@ -1,3 +1,6 @@
+#ifndef Heure_H
+#define Heure_H
+
 class Heure{
 private: 
 	int heure;
@@ -29,3 +32,4 @@ public:
 	// fonctions metier
 	virtual int diff(Heure h);
 };
+#endif

@@ -1,4 +1,7 @@
 // class permettant de gérer le chronomètre
+#ifndef Chrono_H
+#define Chrono_H
+
 class Chronometre{
 public:
 	virtual char* getHeure();
@@ -7,3 +10,5 @@ public:
 	virtual void start();
 	virtual void stop();
 };
+
+#endif
