@@ -1,7 +1,7 @@
 #ifndef Parcourt_H
 #define Parcourt_H
 
-#include 'Etape.h'
+#include "Etape.h"
 class Parcourt {
 private :
 	int* etapes = new Etape[40];

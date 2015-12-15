@@ -20,11 +20,16 @@ class Chronometre{
 public:
 
 	DWORD tick_count_start;
+	DWORD tick_count_pause;
 	DWORD tick_count_stop;
+	
+	int current_state;
 
 	virtual Heure* getCurrentTime();
 	
 	virtual void start();
+	virtual void pause();
+	virtual void restart();
 	virtual void stop();
 };
 

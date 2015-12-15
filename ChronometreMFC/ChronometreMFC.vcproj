@@ -242,6 +242,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Parcourt.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
