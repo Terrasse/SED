@@ -88,9 +88,13 @@ void CChronometreMFCDlg::OnEnChangeEdit4()
 void CChronometreMFCDlg::OnBnClickedButton1()
 {
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-	v_heure=0;
-	v_minute=50;
-	v_seconde=0;
+	Chronometre* tmp_chrono= new Chronometre();
+	tmp_chrono->start();
+	Sleep(2000);
+	Heure* tmp_heure=tmp_chrono->getCurrentTime();
+	v_heure=tmp_heure->getHeure();
+	v_minute=tmp_heure->getMinute();
+	v_seconde=tmp_heure->getSeconde();
 	UpdateData(FALSE);
 }
 

@@ -1,14 +1,18 @@
 #ifndef Heure_H
 #define Heure_H
+#include "windows.h"
 
 class Heure{
 private: 
+
 	int heure;
 	int minute;
 	int seconde;
 	int milliseconde;
 
 public:
+	Heure(DWORD start, DWORD stop);
+
 	// modification des attributs
 	// heure
 	virtual int getHeure();
@@ -16,7 +20,7 @@ public:
 	
 	// minute
 	virtual int getMinute();
-	virtual void setMinute(int new_hinute);
+	virtual void setMinute(int new_minute);
 
 	// seconde
 	virtual int getSeconde();

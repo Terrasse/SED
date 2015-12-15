@@ -1,6 +1,8 @@
 // ChronometreMFCDlg.h : fichier d'en-tête
 //
 
+#include "windows.h"
+#include "Chronometre.h"
 #pragma once
 
 // Boîte de dialogue CChronometreMFCDlg
