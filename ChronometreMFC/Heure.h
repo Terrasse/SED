@@ -38,6 +38,7 @@ public:
 
 	// affichage 
 	virtual string format();
+	virtual string formatShort();
 
 	// fonctions metier
 	virtual Heure* diff(Heure* h);

@@ -111,6 +111,63 @@ string Heure::format(){
 	ret = h + ":" + m + ":" + s + "." + ms;
 	return ret;
 };
+//Affichage hh:mm:ss.msms
+string Heure::formatShort(){
+
+	string h,m,s,ms,ret;
+	{
+		ostringstream oss;
+		if(Heure::heure<10){
+			oss << "0" << Heure::heure;
+		}else{
+			oss << Heure::heure;
+		}
+		h = oss.str();
+	}
+
+	{
+		ostringstream oss;
+		if(Heure::minute<10){
+			oss << "0" << Heure::minute;
+		}else{
+			oss << Heure::minute;
+		}
+		m = oss.str();
+	}
+
+	{
+		ostringstream oss;
+		if(Heure::seconde<10){
+			oss << "0" << Heure::seconde;
+		}else{
+			oss << Heure::seconde;
+		}
+		s = oss.str();
+	}
+
+	{
+		ostringstream oss;
+		if(Heure::milliseconde<10){
+			oss << "00" << Heure::milliseconde;
+		}else if(Heure::milliseconde<100){
+			oss << "0" << Heure::milliseconde;
+		}else{
+			oss << Heure::milliseconde;
+		}
+		ms = oss.str();
+	}
+	if(Heure::heure>0){
+		ret = h + "h " + m + "m " + s + "s " + ms+"ms";
+	}else if(Heure::minute>0){
+		ret = m + "m " + s + "s " + ms+"ms";
+	}else if(Heure::seconde>0){
+		ret = s + "s " + ms+"ms";
+	}else if(Heure::milliseconde>0){
+		ret = ms+"ms";
+	}
+
+	return ret;
+};
 
 Heure* Heure::diff(Heure* h){
 
