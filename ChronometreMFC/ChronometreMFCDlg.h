@@ -52,5 +52,6 @@ public:
 	afx_msg void OnLbnSelchangeList3();
 	afx_msg void OnEnChangeEdit6();
 	afx_msg void OnBnClickedButton4();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
