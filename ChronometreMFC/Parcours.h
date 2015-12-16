@@ -2,14 +2,20 @@
 #define Parcours_H
 
 #include "Etape.h"
+#include "Position.h"
 #include "Chronometre.h"
+#include "GPS.h"
+#include <iostream>
+#include <sstream>
 using namespace std;
 
 class Parcours {
 private :
 	Etape etape[40];
 	int current;
+	Position* origine;
 	Chronometre* c;
+	GPS* gps;
 public : 
 	Parcours();
 

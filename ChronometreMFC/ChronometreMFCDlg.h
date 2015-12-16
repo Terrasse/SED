@@ -5,6 +5,8 @@
 #include "Parcours.h"
 #include "Chronometre.h"
 #include "Heure.h"
+#include <string.h>
+using namespace std;
 #pragma once
 
 // Boîte de dialogue CChronometreMFCDlg
@@ -36,6 +38,8 @@ public:
 	int v_heure;
 	int v_minute;
 	int v_seconde;
+	int v_ms;
+    CListBox m_listBox;
 	Parcours *v_parcours;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton3();
@@ -46,7 +50,6 @@ public:
 	void doUpdate();
 	afx_msg void OnLbnSelchangeList3();
 	afx_msg void OnEnChangeEdit6();
-	int v_ms;
 	afx_msg void OnBnClickedButton4();
 };
 

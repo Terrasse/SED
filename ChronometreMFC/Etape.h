@@ -9,4 +9,5 @@ struct Etape {
 	Position* position;
 	bool pause;
 };
+					   
 #endif

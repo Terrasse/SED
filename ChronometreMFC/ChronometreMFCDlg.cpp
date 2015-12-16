@@ -25,14 +25,19 @@ CChronometreMFCDlg::CChronometreMFCDlg(CWnd* pParent /*=NULL*/)
 void CChronometreMFCDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT5, v_heure);
-	DDX_Text(pDX, IDC_EDIT4, v_minute);
-	DDX_Text(pDX, IDC_EDIT3, v_seconde);
-	DDX_Text(pDX, IDC_EDIT6, v_ms);
+	//DDX_Text(pDX, IDC_EDIT5, v_heure); -> IDC_STATIC5
+	//DDX_Text(pDX, IDC_EDIT4, v_minute); -> IDC_STATIC6
+	//DDX_Text(pDX, IDC_EDIT3, v_seconde); -> IDC_STATIC7
+	//DDX_Text(pDX, IDC_EDIT6, v_ms); -> IDC_STATIC8
+	DDX_Text(pDX, IDC_STATIC5, v_heure);
+	DDX_Text(pDX, IDC_STATIC6, v_minute);
+	DDX_Text(pDX, IDC_STATIC7, v_seconde);
+	DDX_Text(pDX, IDC_STATIC8, v_ms);
 	DDV_MinMaxInt(pDX, v_minute, 0, 60);
 	DDV_MinMaxInt(pDX, v_heure, 0, 24);
 	DDV_MinMaxInt(pDX, v_seconde, 0, 60);
 	DDV_MinMaxInt(pDX, v_ms, 0, 1000);
+    DDX_Control(pDX, IDC_LIST3, m_listBox);
 }
 
 BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
@@ -40,10 +45,10 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_WM_SIZE()
 #endif
 	//}}AFX_MSG_MAP
-	ON_EN_CHANGE(IDC_EDIT4, &CChronometreMFCDlg::OnEnChangeEdit4)
+	//REMPLACER ?? ON_EN_CHANGE(IDC_EDIT4, &CChronometreMFCDlg::OnEnChangeEdit4) -> ON_EN_CHANGE(IDC_STATIC7, &CChronometreMFCDlg::OnEnChangeStatic6)
 	ON_BN_CLICKED(IDC_BUTTON1, &CChronometreMFCDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON3, &CChronometreMFCDlg::OnBnClickedButton3)
-	ON_EN_CHANGE(IDC_EDIT5, &CChronometreMFCDlg::OnEnChangeEdit5)
+	//REMPLACER ?? ON_EN_CHANGE(IDC_EDIT5, &CChronometreMFCDlg::OnEnChangeEdit5) -> ON_EN_CHANGE(IDC_STATIC6, &CChronometreMFCDlg::OnEnChangeStatic5) 
 	ON_BN_CLICKED(IDC_BUTTON2, &CChronometreMFCDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON4, &CChronometreMFCDlg::OnBnClickedButton4)
 END_MESSAGE_MAP()
@@ -169,5 +174,10 @@ void CChronometreMFCDlg::doUpdate()
 void CChronometreMFCDlg::OnBnClickedButton4()
 {
 	doUpdate();
+	v_parcours->tour();
+	string etape = v_parcours->getLastEtape();
+	wstring str;
+	str.assign(etape.begin(), etape.end());
+	m_listBox.InsertString(0,str.c_str());
 	UpdateData(FALSE);
 }

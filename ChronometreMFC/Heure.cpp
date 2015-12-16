@@ -65,29 +65,58 @@ void Heure::setMilliseconde(int new_milliseconde){
 //Affichage hh:mm:ss.msms
 string Heure::format(){
 
-	ostringstream oss;
 	string h,m,s,ms,ret;
-	oss << Heure::heure;
-	h = oss.str();
+	{
+		ostringstream oss;
+		if(Heure::heure<10){
+			oss << "0" << Heure::heure;
+		}else{
+			oss << Heure::heure;
+		}
+		h = oss.str();
+	}
 
-	oss << Heure::minute;
-	m = oss.str();
+	{
+		ostringstream oss;
+		if(Heure::minute<10){
+			oss << "0" << Heure::minute;
+		}else{
+			oss << Heure::minute;
+		}
+		m = oss.str();
+	}
 
-	oss << Heure::seconde;
+	{
+	ostringstream oss;
+	if(Heure::seconde<10){
+		oss << "0" << Heure::seconde;
+	}else{
+		oss << Heure::seconde;
+	}
 	s = oss.str();
+	}
 
-	oss << Heure::milliseconde;
-	ms = oss.str();
+	{
+		ostringstream oss;
+		if(Heure::milliseconde<10){
+			oss << "00" << Heure::milliseconde;
+		}else if(Heure::milliseconde<100){
+			oss << "0" << Heure::milliseconde;
+		}else{
+			oss << Heure::milliseconde;
+		}
+		ms = oss.str();
+	}
 
 	ret = h + ":" + m + ":" + s + "." + ms;
 	return ret;
 };
 
-Heure Heure::diff(Heure h){
+Heure Heure::diff(Heure* h){
 
 	//Conversion des heures en millisecondes 
 	int sec_h1 = Heure::heure * 3600000 + Heure::minute * 60000 + Heure::seconde * 1000 + Heure::milliseconde;
-	int sec_h2 = h.getHeure() * 3600000 + h.getMinute() * 60000 + h.getSeconde() * 1000 + h.getMilliseconde();
+	int sec_h2 = h->getHeure() * 3600000 + h->getMinute() * 60000 + h->getSeconde() * 1000 + h->getMilliseconde();
 	
 	//Calcul de la différence
 	int dif = (sec_h2 - sec_h1);

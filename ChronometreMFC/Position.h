@@ -26,9 +26,23 @@ public:
 	// affichage
 	virtual string toString();
 
-	static double calculDistance(Position * p1 , Position * p2);
-	static double deg2rad(double);
-	static double rad2deg(double);
-	static double distance(double lat1, double lon1, double lat2, double lon2);
+	static double calculDistance(Position * p1 , Position * p2){
+		return Position::distance(p1->getLatitude(),p1->getLongitude(),p2->getLatitude(),p2->getLongitude());
+	}
+	static double distance(double lat1, double lon1, double lat2, double lon2){
+		double theta, dist;
+		theta = lon1 - lon2;
+		dist = sin(Position::deg2rad(lat1)) * sin(Position::deg2rad(lat2)) + cos(Position::deg2rad(lat1)) * cos(Position::deg2rad(lat2)) * cos(Position::deg2rad(theta));
+		dist = acos(dist);
+		dist = Position::rad2deg(dist);
+		dist = dist * 60 * 1.1515 * 1.609344;
+		return dist;
+	}
+	static double deg2rad(double deg) {
+		return (deg * pi / 180);
+	}
+	static double rad2deg(double rad) {
+		return (rad * 180 / pi);
+	}
 };
 #endif
