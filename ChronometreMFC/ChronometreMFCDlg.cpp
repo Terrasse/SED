@@ -38,6 +38,8 @@ void CChronometreMFCDlg::DoDataExchange(CDataExchange* pDX)
 	DDV_MinMaxInt(pDX, v_seconde, 0, 60);
 	DDV_MinMaxInt(pDX, v_ms, 0, 1000);
     DDX_Control(pDX, IDC_LIST3, m_listBox);
+    DDX_Control(pDX, IDC_LIST3, m_listBox);
+    DDX_Control(pDX, IDC_LIST3, m_listBox);
 }
 
 BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
@@ -86,42 +88,36 @@ void CChronometreMFCDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 #endif
 
 
-void CChronometreMFCDlg::OnEnChangeEdit4()
-{
-	v_parcours->tour();
-	// TODO:  S'il s'agit d'un contrôle RICHEDIT, le contrôle ne
-	// envoyez cette notification sauf si vous substituez CDialog::OnInitDialog()
-	// fonction et appelle CRichEditCtrl().SetEventMask()
-	// avec l'indicateur ENM_CHANGE ajouté au masque grâce à l'opérateur OR.
 
-	// TODO:  Ajoutez ici le code de votre gestionnaire de notification de contrôle
-}
-
-
-
-
-void CChronometreMFCDlg::OnEnChangeEdit5()
-{
-	v_parcours->tour();
-	// TODO:  If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CDialog::OnInitDialog()
-	// function and call CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
-
-	// TODO:  Add your control notification handler code here
-}
-
-// Bouton tour
+// Bouton Restart
 void CChronometreMFCDlg::OnBnClickedButton1()
 {
-	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-	v_parcours->tour();
-	/*
-	v_chrono=new Chronometre();
+	v_parcours->stop();
+	v_parcours = new Parcours();
+	CChronometreMFCDlg::maxtour = FALSE;
+	m_listBox.ResetContent();
 
+	
+	// on affiche le boutton restart
+	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
+	pWnd->ShowWindow(FALSE);
+	
+	// on blocker le bouton start
+	pWnd = GetDlgItem( IDC_BUTTON3 );
+	pWnd->EnableWindow(TRUE);
+	
+	// on deblocker le bouton stop
+	pWnd = GetDlgItem( IDC_BUTTON2 );
+	pWnd->EnableWindow(FALSE);
+
+	
+	// on deblocker le bouton tour
+	pWnd = GetDlgItem( IDC_BUTTON4 );
+	pWnd->EnableWindow(FALSE);
+	
 	doUpdate();
-	v_chrono->start();
-	UpdateData(FALSE);*/
+	UpdateData(FALSE);
+	//TODO restart + affiache h dans 1 champ avec conditionnel + blocker bouton start/stop
 }
 
 
@@ -133,9 +129,18 @@ void CChronometreMFCDlg::OnBnClickedButton2()
 		v_parcours = new Parcours();
 	v_parcours->stop();
 
-		//// on hide le boutton restart
-		//CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
-		//pWnd->ShowWindow(SW_SHOW);
+	
+	// on deblocker le bouton start
+	CWnd *pWnd = GetDlgItem( IDC_BUTTON3 );
+	pWnd->EnableWindow(TRUE);
+	
+	// on blocker le bouton stop
+	pWnd = GetDlgItem( IDC_BUTTON2 );
+	pWnd->EnableWindow(FALSE);
+	
+	// on blocker le bouton tour
+	pWnd = GetDlgItem( IDC_BUTTON4 );
+	pWnd->EnableWindow(FALSE);
 	
 	doUpdate();
 	UpdateData(FALSE);
@@ -150,11 +155,25 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 	if(v_parcours == NULL)
 		v_parcours = new Parcours();
 	v_parcours->start();
+	CChronometreMFCDlg::maxtour = FALSE;
 
 
 	// on affiche le boutton restart
 	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
 	pWnd->ShowWindow(SW_SHOW);
+	
+	// on blocker le bouton start
+	pWnd = GetDlgItem( IDC_BUTTON3 );
+	pWnd->EnableWindow(FALSE);
+	
+	// on deblocker le bouton stop
+	pWnd = GetDlgItem( IDC_BUTTON2 );
+	pWnd->EnableWindow(TRUE);
+
+	
+	// on deblocker le bouton tour
+	pWnd = GetDlgItem( IDC_BUTTON4 );
+	pWnd->EnableWindow(TRUE);
 	doUpdate();
 	UpdateData(FALSE);
 }
@@ -170,14 +189,20 @@ void CChronometreMFCDlg::doUpdate()
 		v_ms=tmp_heure->getMilliseconde();
 	} 
 }
-
+//Bouton tour
 void CChronometreMFCDlg::OnBnClickedButton4()
 {
 	doUpdate();
 	v_parcours->tour();
-	string etape = v_parcours->getLastEtape();
 	wstring str;
+	string etape = v_parcours->getLastEtape();
 	str.assign(etape.begin(), etape.end());
-	m_listBox.InsertString(0,str.c_str());
+	if(v_parcours->getNbTours() <= Parcours::getMaxTours() && !CChronometreMFCDlg::maxtour){
+		m_listBox.InsertString(0,str.c_str());
+		CChronometreMFCDlg::maxtour = v_parcours->getNbTours() == Parcours::getMaxTours();
+	}else{
+		m_listBox.DeleteString(0);
+		m_listBox.InsertString(0,str.c_str());
+	}
 	UpdateData(FALSE);
 }

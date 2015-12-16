@@ -39,6 +39,7 @@ public:
 	int v_minute;
 	int v_seconde;
 	int v_ms;
+	bool maxtour;
     CListBox m_listBox;
 	Parcours *v_parcours;
 	afx_msg void OnBnClickedButton1();
