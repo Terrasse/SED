@@ -67,6 +67,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.02"
+				AdditionalDependencies="GPSapi.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				StackReserveSize="65536"
@@ -238,7 +239,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GPS.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Heure.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Position.cpp"
 				>
 			</File>
 			<File

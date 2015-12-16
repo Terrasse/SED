@@ -1,5 +1,11 @@
 #ifndef Position_H
 #define Position_H
+#include <math.h>
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+#define pi 3.14159265358979323846
 
 class Position {
 private: 
@@ -7,6 +13,7 @@ private:
 	double latitude;
 
 public:
+	
 	// modification des attributs
 	// longitude
 	virtual double getLongitude();
@@ -17,6 +24,11 @@ public:
 	virtual void setLatitude(double new_latitude);
 
 	// affichage
-	virtual char* toString();
+	virtual string toString();
+
+	static double calculDistance(Position * p1 , Position * p2);
+	static double deg2rad(double);
+	static double rad2deg(double);
+	static double distance(double lat1, double lon1, double lat2, double lon2);
 };
 #endif
