@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON3, &CChronometreMFCDlg::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON2, &CChronometreMFCDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON4, &CChronometreMFCDlg::OnBnClickedButton4)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -55,6 +56,9 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 
 	// TODO : ajoutez ici une initialisation supplémentaire
 	
+	//Le timer se déclenche toutes les 10ms voir onTimer pour le catch de l'event
+	SetTimer(1, 10, NULL);
+
 	return TRUE;  // retourne TRUE, sauf si vous avez défini le focus sur un contrôle
 }
 
@@ -179,4 +183,15 @@ void CChronometreMFCDlg::OnBnClickedButton4()
 		m_listBox.InsertString(0,str.c_str());
 	}
 	UpdateData(FALSE);
+}
+
+void CChronometreMFCDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	CDialog::OnTimer(nIDEvent);
+	UpdateData(FALSE);
+	if(v_parcours != NULL){
+		doUpdate();
+	}
 }
