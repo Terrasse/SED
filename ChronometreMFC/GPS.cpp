@@ -49,3 +49,7 @@ void GPS::initGps(){
 		cout << "Le GPS t'envoie chier\n";
 	}	
 }
+
+GPS::~GPS(void){
+	GPSCloseDevice(this->m_hGPS_Device);
+}
