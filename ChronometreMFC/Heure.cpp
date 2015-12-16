@@ -112,7 +112,7 @@ string Heure::format(){
 	return ret;
 };
 
-Heure Heure::diff(Heure* h){
+Heure* Heure::diff(Heure* h){
 
 	//Conversion des heures en millisecondes 
 	int sec_h1 = Heure::heure * 3600000 + Heure::minute * 60000 + Heure::seconde * 1000 + Heure::milliseconde;
@@ -120,24 +120,22 @@ Heure Heure::diff(Heure* h){
 	
 	//Calcul de la différence
 	int dif = (sec_h2 - sec_h1);
-	int dif_pos = dif * dif / dif;
+	//int dif_pos = dif * dif / dif;
 
 	//Remise en forme de l'heure
-	int milliseconde = (int) dif_pos % 1000;
-	dif_pos = (int) dif_pos / 1000;
-	int seconde = (int) dif_pos % 60;
-	dif_pos = (int) dif_pos / 60;
-	int minute = (int) dif_pos % 60;
-	int heure = (int) dif_pos / 60;
+	int milliseconde = (int) dif % 1000;
+	dif = (int) dif / 1000;
+	int seconde = (int) dif % 60;
+	dif = (int) dif / 60;
+	int minute = (int) dif % 60;
+	int heure = (int) dif / 60;
 
-	//Meilleur solution ?
-	Heure* new_h_ptn = new Heure();
-	Heure new_h = *new_h_ptn;
+	Heure* new_h = new Heure();
 
-	new_h.setHeure(heure);
-	new_h.setMinute(minute);
-	new_h.setSeconde(seconde);
-	new_h.setMilliseconde(milliseconde);
+	new_h->setHeure(heure);
+	new_h->setMinute(minute);
+	new_h->setSeconde(seconde);
+	new_h->setMilliseconde(milliseconde);
 
 	return new_h;
 }

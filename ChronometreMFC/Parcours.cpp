@@ -44,9 +44,11 @@ string Parcours::getLastEtape(){
 	{
 		ostringstream oss;
 		if(Parcours::current<10){
-			oss << Parcours::current;
+			oss << "00" << Parcours::current;
+		}else if(Parcours::current<100){
+			oss << "0" << Parcours::current;
 		}else{
-			oss <<  "0" << Parcours::current;
+			oss <<  Parcours::current;
 		}
 		cur = oss.str();
 	}
@@ -55,8 +57,8 @@ string Parcours::getLastEtape(){
 		if((Parcours::current - 1)==0){
 			oss << Parcours::etape[(Parcours::current - 1)].heure->format();
 		}else{
-			oss << Parcours::etape[(Parcours::current - 1)].heure->format();
-			// revoir diff oss << Parcours::etape[(Parcours::current - 1)].heure->diff(Parcours::etape[(Parcours::current - 2)].heure).format();
+			//oss << Parcours::etape[(Parcours::current - 1)].heure->format();
+			oss << Parcours::etape[(Parcours::current - 2)].heure->diff(Parcours::etape[(Parcours::current - 1)].heure)->format();
 		}
 		h = oss.str();
 	}
@@ -70,7 +72,7 @@ string Parcours::getLastEtape(){
 		pos = oss.str();
 	}
 
-	ret = cur + "  " + h + "  " + pos;
+	ret = cur + "   " + h + "   " + pos ;//+"  "+ Parcours::etape[(Parcours::current - 1)].position->toString();
 	return ret;
 
 };

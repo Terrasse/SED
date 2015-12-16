@@ -40,7 +40,7 @@ public:
 	virtual string format();
 
 	// fonctions metier
-	virtual Heure diff(Heure* h);
+	virtual Heure* diff(Heure* h);
 };
 #endif
 

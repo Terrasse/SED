@@ -11,7 +11,7 @@ using namespace std;
 
 class Parcours {
 private :
-	Etape etape[40];
+	Etape etape[110];
 	int current;
 	Position* origine;
 	Chronometre* c;
