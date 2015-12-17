@@ -66,15 +66,12 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 #if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
 void CChronometreMFCDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 {
-	if (AfxIsDRAEnabled())
-	{
-		DRA::RelayoutDialog(
-			AfxGetResourceHandle(), 
-			this->m_hWnd, 
-			DRA::GetDisplayMode() != DRA::Portrait ? 
-			MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG_WIDE) : 
-			MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG));
-	}
+	DRA::RelayoutDialog(
+		AfxGetResourceHandle(), 
+		this->m_hWnd, 
+		DRA::GetDisplayMode() != DRA::Portrait ? 
+		MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG_WIDE) : 
+		MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG));
 }
 #endif
 

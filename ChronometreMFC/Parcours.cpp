@@ -82,9 +82,9 @@ string Parcours::getLastEtape(){
 	{
 		ostringstream oss;
 		if(Parcours::etape->terry==NULL){
-			oss << Position::calculDistance(Parcours::etape->position,Parcours::origine);
+			oss << Position::calculDistanceToString(Parcours::etape->position,Parcours::origine);
 		}else{
-			oss << Position::calculDistance(Parcours::etape->position,Parcours::etape->terry->position);
+			oss << Position::calculDistanceToString(Parcours::etape->position,Parcours::etape->terry->position);
 		}
 		pos = oss.str();
 	}

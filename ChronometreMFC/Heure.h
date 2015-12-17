@@ -1,9 +1,9 @@
 #ifndef Heure_H
 #define Heure_H
 #include "windows.h"
-#include "iostream"
-#include "sstream"
-#include "string"
+#include <iostream>
+#include <sstream>
+#include <string>
 using namespace std;
 
 class Heure{

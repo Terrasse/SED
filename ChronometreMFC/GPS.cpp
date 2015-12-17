@@ -28,7 +28,7 @@ Position* GPS::getPosition(){
                 this->m_hGPS_Device, 
                 &gps_Position, MAX_AGE, 0);
 
-	cout << "lat" << gps_Position.dblLatitude <<"; long" << gps_Position.dblLongitude <<"\n";
+	//cout << "lat" << gps_Position.dblLatitude <<"; long" << gps_Position.dblLongitude <<"\n";
 
 	Position* p= new Position();
 	p->setLatitude(gps_Position.dblLatitude);
