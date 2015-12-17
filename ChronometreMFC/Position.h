@@ -17,6 +17,8 @@ private:
 
 public:
 	
+	Position(double longitude,double lalitude);
+
 	// modification des attributs
 	// longitude
 	virtual double getLongitude();
@@ -54,33 +56,9 @@ public:
 	}
 
 	static int calculDistance(Position * p1 , Position * p2){
-		int i;
-		i = rand()%10;
-		printf("%d\t",i);
-		if(i ==1){
-			return 1;
-		}else if(i ==2){
-			return 22;
-		}else  if(i ==3){
-			return 333;
-		}else  if(i ==4){
-			return 4444;
-		}else  if(i ==5){
-			return 55555;
-		}else  if(i ==6){
-			return 666666;
-		}else  if(i ==7){
-			return 7777777;
-		}else  if(i ==8){
-			return 88888888;
-		}else  if(i ==9){
-			return 9999999999;
-		}else {
-			return 0.01;
-		}
-
 		return Position::distance(p1->getLatitude(),p1->getLongitude(),p2->getLatitude(),p2->getLongitude());
 	}
+
 	static int distance(double lat1, double lon1, double lat2, double lon2){
 		double theta, dist;
 		theta = lon1 - lon2;

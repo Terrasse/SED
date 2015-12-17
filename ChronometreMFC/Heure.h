@@ -18,6 +18,7 @@ public:
 
 	Heure();
 	Heure(DWORD start, DWORD stop);
+	void Heure::importTicCount(DWORD start, DWORD stop);
 
 	// modification des attributs
 	// heure

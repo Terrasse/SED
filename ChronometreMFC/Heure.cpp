@@ -10,24 +10,28 @@ Heure::Heure(){
 };
 
 Heure::Heure(DWORD start, DWORD stop){
-		int diff = stop - start;
+	Heure();
+	importTicCount(start,stop);
+};
 
-		if(diff > 0){
-			milliseconde = (int) diff % 1000;
-			diff = (int) diff / 1000;
-			seconde = (int) diff % 60;
-			diff = (int) diff / 60;
-			minute = (int) diff % 60;
-			heure = (int) diff / 60;
-		}
-		else{
-			milliseconde = 0;
-			seconde = 0;
-			minute = 0;
-			heure = 0;
-		}
-	};
+void Heure::importTicCount(DWORD start, DWORD stop) {
+	int diff = stop - start;
 
+	if(diff > 0){
+		milliseconde = (int) diff % 1000;
+		diff = (int) diff / 1000;
+		seconde = (int) diff % 60;
+		diff = (int) diff / 60;
+		minute = (int) diff % 60;
+		heure = (int) diff / 60;
+	}
+	else{
+		milliseconde = 0;
+		seconde = 0;
+		minute = 0;
+		heure = 0;
+	}
+}
 //Getters
 int Heure::getHeure(){
 		return Heure::heure;

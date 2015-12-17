@@ -1,21 +1,22 @@
 #include "stdafx.h"
 #include "Parcours.h"
 
-Parcours::Parcours(Chronometre *chrono){
+Parcours::Parcours(Chronometre *chrono, GPS *gps){
 	Parcours::origine = NULL;
 	Parcours::etape = NULL;
 	Parcours::c = chrono;
-	Parcours::gps = new GPS();
+	Parcours::gps = gps;
 };
 
 void Parcours::start(){
+	gps->start();
 	c->start();
 	Parcours::origine = gps->getPosition();
 	//TODO : Gestion du GPS
 };
 
 void Parcours::stop(){
-
+	gps->stop();
 	c->stop();
 	//Création d'un nouvelle étape
 	//Pourquoi une sauvegarde de tour

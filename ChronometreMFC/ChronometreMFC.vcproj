@@ -496,6 +496,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\etat.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GPS.h"
 				>
 			</File>

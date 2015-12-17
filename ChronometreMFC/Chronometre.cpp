@@ -8,6 +8,7 @@
 		_current_time = new Heure(0,0);
 		_state = RESET;
 		mu = CreateMutex(NULL,FALSE,NULL);
+		this->initChronometre();
 	}
 	
 	Heure* Chronometre::getCurrentTime(){
@@ -27,7 +28,7 @@
 					if ( c->_state == RESET ) {
 						c->_tick_count_start = 0;
 						c->_tick_count_stop = 0;
-						c->_current_time = new Heure(0,0);
+						c->_current_time->importTicCount(0,0);
 					}
 
 					// lorsque le chronometre est ON
@@ -43,7 +44,7 @@
 							c->_tick_count_stop = 0;
 						}
 						DWORD tick_count_current = GetTickCount();
-						c->_current_time = new Heure(c->_tick_count_start, tick_count_current);
+						c->_current_time->importTicCount(c->_tick_count_start, tick_count_current);
 					} 
 					
 					// lorque le chronometre est OFF
@@ -52,12 +53,12 @@
 						if(c->_tick_count_stop == 0){
 							c->_tick_count_stop = GetTickCount();
 						}
-						c->_current_time = new Heure(c->_tick_count_start, c->_tick_count_stop);
+						c->_current_time->importTicCount(c->_tick_count_start, c->_tick_count_stop);
 					}
 					ReleaseMutex(c->mu); 
 					break; 
 				case WAIT_ABANDONED: 
-					c->_current_time = new Heure(0,0);
+					c->_current_time->importTicCount(0,0);
 					break;
 			}
 			Sleep(FREQUENCE_RAF);
@@ -74,7 +75,7 @@
 		changeState(OFF);
 	};
 
-	void Chronometre::initThread(){
+	void Chronometre::initChronometre(){
 		AfxBeginThread(UpdateCurrentTime,this);
 	}
 

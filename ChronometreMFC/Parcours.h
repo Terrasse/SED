@@ -19,7 +19,7 @@ private :
 	Chronometre* c;
 	GPS* gps;
 public : 
-	Parcours(Chronometre *chrono);
+	Parcours(Chronometre *chrono, GPS *gps);
 
 	// fonctions 
 	void init();

@@ -1,16 +1,20 @@
 #ifndef GPS_H
 #define GPS_H
 
-#include <GPSApi.h>
-
 #include "Position.h"
+#include "etat.h"
+#include <iostream>
+#include <afxmt.h>
+#include <GPSApi.h>
+using namespace std;
 
 interface IGPSSink
 {
     virtual HRESULT SetGPSPosition(GPS_POSITION gps_Position) = 0;
     virtual HRESULT SetGPSDeviceInfo(GPS_DEVICE gps_Device) = 0;
 };
-class  GPS {
+
+class  GPS{
 public:
     //Device handle
     HANDLE m_hGPS_Device;
@@ -27,12 +31,26 @@ public:
 
     //Exit event
     HANDLE m_hExitThread;
+
+	Position *_position;
+
+	etat _state;
+	// Mutex
+	HANDLE mu_position;
+	HANDLE mu_state;
+
 private :
 	virtual void initGps();
 public :
 	GPS(void);
-	virtual Position* getPosition();
+	virtual void start();
+	virtual void stop();
+	virtual void changeState(etat newState);
+	virtual Position * getPosition();
+	virtual void setPosition(double newLongitude, double newLatitude);
 	//destructeur;
 	~GPS(void);
 };
+
+UINT UpdateCurrentPosition(LPVOID pParam);
 #endif

@@ -54,8 +54,8 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 
 	// TODO : ajoutez ici une initialisation supplémentaire
 	Chronometre *c= new Chronometre();
-	c->initThread();
-	v_parcours = new Parcours(c);
+	GPS *gps=new GPS();
+	v_parcours = new Parcours(c,gps);
 	//Le timer se déclenche toutes les 10ms voir onTimer pour le catch de l'event
 	SetTimer(1, 21, NULL);
 

@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Heure.h"
 #include "windows.h"
+#include "etat.h"
 #include <iostream>
 #include <afxmt.h>
 
@@ -12,7 +13,7 @@ using namespace std;
 #define Chrono_H
 // class permettant de gérer le chronomètre
 //#include "EtatChronometre.h"
-enum etat { ON = '0', OFF = '1', RESET = '2'};
+
 
 class Chronometre{
 
@@ -33,7 +34,7 @@ public:
 	virtual void restart();
 	virtual void stop();
 	virtual void changeState(etat newState);
-	virtual void initThread();
+	virtual void initChronometre();
 };
 // Threading function
 UINT UpdateCurrentTime(LPVOID pParam);
