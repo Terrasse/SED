@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "Parcours.h"
 
-Parcours::Parcours(){
+Parcours::Parcours(Chronometre *chrono){
 	Parcours::current = 0;
 	Parcours::origine = NULL;
-	Parcours::c = new Chronometre();
+	Parcours::c = chrono;
 	Parcours::gps = new GPS();
-
 };
 
 void Parcours::start(){
@@ -34,6 +33,10 @@ void Parcours::tour(){
 		Parcours::current++;
 };
 
+void Parcours::reset(){
+	c->restart();
+	Parcours::current = 0;
+}
 
 Chronometre* Parcours::getChronometre(){
 	return Parcours::c;

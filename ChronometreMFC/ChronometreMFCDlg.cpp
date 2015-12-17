@@ -1,8 +1,5 @@
 // ChronometreMFCDlg.cpp : fichier d'implémentation
-//
-
 #include "stdafx.h"
-#include "ChronometreMFC.h"
 #include "ChronometreMFCDlg.h"
 
 #ifdef _DEBUG
@@ -45,12 +42,11 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_WM_SIZE()
 #endif
 	//}}AFX_MSG_MAP
-	//REMPLACER ?? ON_EN_CHANGE(IDC_EDIT4, &CChronometreMFCDlg::OnEnChangeEdit4) -> ON_EN_CHANGE(IDC_STATIC7, &CChronometreMFCDlg::OnEnChangeStatic6)
 	ON_BN_CLICKED(IDC_BUTTON1, &CChronometreMFCDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON3, &CChronometreMFCDlg::OnBnClickedButton3)
-	//REMPLACER ?? ON_EN_CHANGE(IDC_EDIT5, &CChronometreMFCDlg::OnEnChangeEdit5) -> ON_EN_CHANGE(IDC_STATIC6, &CChronometreMFCDlg::OnEnChangeStatic5) 
 	ON_BN_CLICKED(IDC_BUTTON2, &CChronometreMFCDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON4, &CChronometreMFCDlg::OnBnClickedButton4)
+	ON_STN_CLICKED(IDC_STATIC8, &CChronometreMFCDlg::OnStnClickedStatic8)
 END_MESSAGE_MAP()
 
 
@@ -66,7 +62,10 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Définir une petite icône
 
 	// TODO : ajoutez ici une initialisation supplémentaire
-	
+	Chronometre *c= new Chronometre();
+	c->initThread();
+	v_parcours = new Parcours(c);
+
 	return TRUE;  // retourne TRUE, sauf si vous avez défini le focus sur un contrôle
 }
 
@@ -84,53 +83,14 @@ void CChronometreMFCDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 	}
 }
 #endif
-
-
-void CChronometreMFCDlg::OnEnChangeEdit4()
-{
-	v_parcours->tour();
-	// TODO:  S'il s'agit d'un contrôle RICHEDIT, le contrôle ne
-	// envoyez cette notification sauf si vous substituez CDialog::OnInitDialog()
-	// fonction et appelle CRichEditCtrl().SetEventMask()
-	// avec l'indicateur ENM_CHANGE ajouté au masque grâce à l'opérateur OR.
-
-	// TODO:  Ajoutez ici le code de votre gestionnaire de notification de contrôle
+// Boutton RESTART
+void CChronometreMFCDlg::OnBnClickedButton1(){
+	v_parcours->reset();
 }
-
-
-
-
-void CChronometreMFCDlg::OnEnChangeEdit5()
-{
-	v_parcours->tour();
-	// TODO:  If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CDialog::OnInitDialog()
-	// function and call CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
-
-	// TODO:  Add your control notification handler code here
-}
-
-// Bouton tour
-void CChronometreMFCDlg::OnBnClickedButton1()
-{
-	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
-	v_parcours->tour();
-	/*
-	v_chrono=new Chronometre();
-
-	doUpdate();
-	v_chrono->start();
-	UpdateData(FALSE);*/
-}
-
-
 // Boutton STOP
 void CChronometreMFCDlg::OnBnClickedButton2()
 {
 	// TODO: Add your control notification handler code here
-	if(v_parcours == NULL)
-		v_parcours = new Parcours();
 	v_parcours->stop();
 
 		//// on hide le boutton restart
@@ -146,11 +106,7 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 {
 	// TODO : ajoutez ici le code de votre gestionnaire de notification de contrôle
 	
-	// creer le thread chronomètre initilialisé aux valeurs 
-	if(v_parcours == NULL)
-		v_parcours = new Parcours();
 	v_parcours->start();
-
 
 	// on affiche le boutton restart
 	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
@@ -171,13 +127,20 @@ void CChronometreMFCDlg::doUpdate()
 	} 
 }
 
+// Méthode tour
 void CChronometreMFCDlg::OnBnClickedButton4()
 {
 	doUpdate();
-	v_parcours->tour();
-	string etape = v_parcours->getLastEtape();
-	wstring str;
-	str.assign(etape.begin(), etape.end());
-	m_listBox.InsertString(0,str.c_str());
+	//v_parcours->tour();
+	//string etape = v_parcours->getLastEtape();
+	//wstring str;
+	//str.assign(etape.begin(), etape.end());
+	//m_listBox.InsertString(0,str.c_str());
 	UpdateData(FALSE);
 }
+
+void CChronometreMFCDlg::OnStnClickedStatic8()
+{
+	// TODO: Add your control notification handler code here
+}
+

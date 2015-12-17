@@ -17,19 +17,18 @@ private :
 	Chronometre* c;
 	GPS* gps;
 public : 
-	Parcours();
+	Parcours(Chronometre *chrono);
 
 	// fonctions 
 	void init();
 	void start();
 	void stop();
 	void tour();
-
+	void reset();
 	Chronometre* getChronometre();
 	
-
 	//Permet de récupérer la dernière étape 
 	string getLastEtape();
-
+	
 };
 #endif

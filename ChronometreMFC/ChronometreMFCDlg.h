@@ -1,11 +1,14 @@
 // ChronometreMFCDlg.h : fichier d'en-tête
 //
-
+#include "stdafx.h"
+#include "ChronometreMFC.h"
 #include "windows.h"
 #include "Parcours.h"
 #include "Chronometre.h"
 #include "Heure.h"
-#include <string.h>
+#include <string>
+#include <Afxmt.h>
+
 using namespace std;
 #pragma once
 
@@ -51,5 +54,6 @@ public:
 	afx_msg void OnLbnSelchangeList3();
 	afx_msg void OnEnChangeEdit6();
 	afx_msg void OnBnClickedButton4();
+	afx_msg void OnStnClickedStatic8();
 };
 
