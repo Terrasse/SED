@@ -37,23 +37,26 @@ protected:
 #endif
 	DECLARE_MESSAGE_MAP()
 public:
-	
-	int v_heure;
-	int v_minute;
-	int v_seconde;
-	int v_ms;
+	CWnd m_sText;
+	CWnd m_bRestart;
+	CWnd m_bStop;
+	CWnd m_bStart;
+	CWnd m_bTour;
     CListBox m_listBox;
 	Parcours *v_parcours;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton3();
-	afx_msg void OnEnChangeEdit4();
-	afx_msg void OnEnChangeEdit5();
 	afx_msg void OnStartRefresh();
 	afx_msg void OnBnClickedButton2();
 	void doUpdate();
 	afx_msg void OnLbnSelchangeList3();
 	afx_msg void OnEnChangeEdit6();
 	afx_msg void OnBnClickedButton4();
+<<<<<<< HEAD
 	afx_msg void OnStnClickedStatic8();
+=======
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnStnClickedStatic0();
+>>>>>>> cd3efc16213b1e3970de3090046254b3a029d68a
 };
 

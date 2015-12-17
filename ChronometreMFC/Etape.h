@@ -7,7 +7,8 @@
 struct Etape {
 	Heure* heure;
 	Position* position;
-	bool pause;
+	Etape* terry;
+	int tour;
 };
 					   
 #endif

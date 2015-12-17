@@ -5,6 +5,7 @@
 #define IDD_CHRONOMETREMFC_DIALOG       102
 #define IDD_CHRONOMETREMFC_DIALOG_WIDE  103
 #define IDD_CHRONOMETREMFC_DIALOG1      104
+#define IDD_CHRONOMETREMFC_DIALOG2      105
 #define IDR_MAINFRAME                   128
 #define IDC_STATIC_1                    200
 #define IDC_EDIT3                       1002
@@ -20,6 +21,7 @@
 #define IDC_STATIC6                     1015
 #define IDC_STATIC7                     1016
 #define IDC_STATIC8                     1017
+#define IDC_STATIC0                     1018
 
 // Next default values for new objects
 // 
@@ -27,7 +29,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        129
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1018
+#define _APS_NEXT_CONTROL_VALUE         1019
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

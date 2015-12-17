@@ -9,10 +9,12 @@
 #include <sstream>
 using namespace std;
 
-class Parcours {
+//#define MAX_TOUR 15
+
+class Parcours { 
 private :
-	Etape etape[110];
-	int current;
+
+	Etape* etape;
 	Position* origine;
 	Chronometre* c;
 	GPS* gps;
@@ -29,6 +31,8 @@ public :
 	
 	//Permet de récupérer la dernière étape 
 	string getLastEtape();
-	
+
+	int getNbTours();	
+
 };
 #endif

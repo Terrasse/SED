@@ -11,10 +11,7 @@
 CChronometreMFCDlg::CChronometreMFCDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CChronometreMFCDlg::IDD, pParent)
 	, v_parcours(NULL)
-	, v_heure(0)
-	, v_minute(0)
-	, v_seconde(0)
-	, v_ms(0)
+	
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -22,19 +19,12 @@ CChronometreMFCDlg::CChronometreMFCDlg(CWnd* pParent /*=NULL*/)
 void CChronometreMFCDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//DDX_Text(pDX, IDC_EDIT5, v_heure); -> IDC_STATIC5
-	//DDX_Text(pDX, IDC_EDIT4, v_minute); -> IDC_STATIC6
-	//DDX_Text(pDX, IDC_EDIT3, v_seconde); -> IDC_STATIC7
-	//DDX_Text(pDX, IDC_EDIT6, v_ms); -> IDC_STATIC8
-	DDX_Text(pDX, IDC_STATIC5, v_heure);
-	DDX_Text(pDX, IDC_STATIC6, v_minute);
-	DDX_Text(pDX, IDC_STATIC7, v_seconde);
-	DDX_Text(pDX, IDC_STATIC8, v_ms);
-	DDV_MinMaxInt(pDX, v_minute, 0, 60);
-	DDV_MinMaxInt(pDX, v_heure, 0, 24);
-	DDV_MinMaxInt(pDX, v_seconde, 0, 60);
-	DDV_MinMaxInt(pDX, v_ms, 0, 1000);
     DDX_Control(pDX, IDC_LIST3, m_listBox);
+    DDX_Control(pDX, IDC_STATIC0, m_sText);
+    DDX_Control(pDX, IDC_BUTTON1, m_bRestart);
+    DDX_Control(pDX, IDC_BUTTON2, m_bStop);
+    DDX_Control(pDX, IDC_BUTTON3, m_bStart);
+    DDX_Control(pDX, IDC_BUTTON4, m_bTour);
 }
 
 BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
@@ -46,7 +36,8 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON3, &CChronometreMFCDlg::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON2, &CChronometreMFCDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON4, &CChronometreMFCDlg::OnBnClickedButton4)
-	ON_STN_CLICKED(IDC_STATIC8, &CChronometreMFCDlg::OnStnClickedStatic8)
+	ON_WM_TIMER()
+	ON_STN_CLICKED(IDC_STATIC0, &CChronometreMFCDlg::OnStnClickedStatic0)
 END_MESSAGE_MAP()
 
 
@@ -65,6 +56,8 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 	Chronometre *c= new Chronometre();
 	c->initThread();
 	v_parcours = new Parcours(c);
+	//Le timer se déclenche toutes les 10ms voir onTimer pour le catch de l'event
+	SetTimer(1, 21, NULL);
 
 	return TRUE;  // retourne TRUE, sauf si vous avez défini le focus sur un contrôle
 }
@@ -72,30 +65,58 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 #if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
 void CChronometreMFCDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 {
-	if (AfxIsDRAEnabled())
-	{
-		DRA::RelayoutDialog(
-			AfxGetResourceHandle(), 
-			this->m_hWnd, 
-			DRA::GetDisplayMode() != DRA::Portrait ? 
-			MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG_WIDE) : 
-			MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG));
-	}
+	DRA::RelayoutDialog(
+		AfxGetResourceHandle(), 
+		this->m_hWnd, 
+		DRA::GetDisplayMode() != DRA::Portrait ? 
+		MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG_WIDE) : 
+		MAKEINTRESOURCE(IDD_CHRONOMETREMFC_DIALOG));
 }
 #endif
-// Boutton RESTART
-void CChronometreMFCDlg::OnBnClickedButton1(){
+
+// Bouton Restart
+void CChronometreMFCDlg::OnBnClickedButton1()
+{
 	v_parcours->reset();
+	m_listBox.ResetContent();
+
+	
+	// on affiche le boutton restart
+	m_bRestart.ShowWindow(FALSE);
+	
+	// on blocker le bouton start
+	m_bStart.EnableWindow(TRUE);
+	
+	// on deblocker le bouton stop
+	m_bStop.EnableWindow(FALSE);
+
+	
+	// on deblocker le bouton tour
+	m_bTour.EnableWindow(FALSE);
+	
+	doUpdate();
+	UpdateData(FALSE);
+	//TODO affiache h dans 1 champ avec conditionnel
 }
+
 // Boutton STOP
 void CChronometreMFCDlg::OnBnClickedButton2()
 {
 	// TODO: Add your control notification handler code here
 	v_parcours->stop();
 
-		//// on hide le boutton restart
-		//CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
-		//pWnd->ShowWindow(SW_SHOW);
+	
+	m_bRestart.ShowWindow(SW_SHOW);
+	m_bRestart.EnableWindow(TRUE);
+
+	// on deblocker le bouton start
+	m_bStart.EnableWindow(TRUE);
+	
+	// on blocker le bouton stop
+	m_bStop.EnableWindow(FALSE);
+	
+	// on blocker le bouton tour
+	m_bTour.EnableWindow(FALSE);
 	
 	doUpdate();
 	UpdateData(FALSE);
@@ -109,8 +130,18 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 	v_parcours->start();
 
 	// on affiche le boutton restart
-	CWnd *pWnd = GetDlgItem( IDC_BUTTON1 );
-	pWnd->ShowWindow(SW_SHOW);
+	m_bRestart.ShowWindow(FALSE);
+	m_bRestart.EnableWindow(FALSE);
+	
+	// on blocker le bouton start
+	m_bStart.EnableWindow(FALSE);
+	
+	// on deblocker le bouton stop
+	m_bStop.EnableWindow(TRUE);
+
+	
+	// on deblocker le bouton tour
+	m_bTour.EnableWindow(TRUE);
 	doUpdate();
 	UpdateData(FALSE);
 }
@@ -118,29 +149,38 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 void CChronometreMFCDlg::doUpdate()
 {
 	Chronometre* v_chrono = v_parcours->getChronometre();
-	if (v_chrono!=NULL) {
-		Heure* tmp_heure=v_chrono->getCurrentTime();
-		v_heure=tmp_heure->getHeure();
-		v_minute=tmp_heure->getMinute();
-		v_seconde=tmp_heure->getSeconde();
-		v_ms=tmp_heure->getMilliseconde();
+	if (v_chrono!=NULL) {	
+		wstring str;
+		string time = v_chrono->getCurrentTime()->formatShort();
+		str.assign(time.begin(), time.end());
+		m_sText.SetWindowText(str.c_str());
 	} 
 }
 
-// Méthode tour
+//Bouton tour
 void CChronometreMFCDlg::OnBnClickedButton4()
 {
 	doUpdate();
-	//v_parcours->tour();
-	//string etape = v_parcours->getLastEtape();
-	//wstring str;
-	//str.assign(etape.begin(), etape.end());
-	//m_listBox.InsertString(0,str.c_str());
+	v_parcours->tour();
+	wstring str;
+	string etape = v_parcours->getLastEtape();
+	str.assign(etape.begin(), etape.end());
+	m_listBox.InsertString(0,str.c_str());
 	UpdateData(FALSE);
 }
 
-void CChronometreMFCDlg::OnStnClickedStatic8()
+void CChronometreMFCDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	CDialog::OnTimer(nIDEvent);
+	if(v_parcours != NULL){
+		doUpdate();
+	}
+	UpdateData(FALSE);
+}
+
+void CChronometreMFCDlg::OnStnClickedStatic0()
 {
 	// TODO: Add your control notification handler code here
 }
-
