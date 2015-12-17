@@ -52,11 +52,7 @@ public:
 	afx_msg void OnLbnSelchangeList3();
 	afx_msg void OnEnChangeEdit6();
 	afx_msg void OnBnClickedButton4();
-<<<<<<< HEAD
-	afx_msg void OnStnClickedStatic8();
-=======
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnStnClickedStatic0();
->>>>>>> cd3efc16213b1e3970de3090046254b3a029d68a
 };
 

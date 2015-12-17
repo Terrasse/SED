@@ -43,7 +43,8 @@ void Parcours::tour(){
 
 void Parcours::reset(){
 	c->restart();
-	Parcours::current = 0;
+	Parcours::origine = NULL;
+	Parcours::etape = NULL;
 }
 
 Chronometre* Parcours::getChronometre(){
