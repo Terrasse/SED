@@ -20,7 +20,7 @@
 	// affichage
 	string Position::toString(){
 		ostringstream  pos;
-		pos << "(lat:" << this->getLatitude() << "; long:" << this->getLongitude() << ")"  ;
+		pos << "(" << this->getLatitude() << ";" << this->getLongitude() << ")"  ;
 		return pos.str();
 	}
 

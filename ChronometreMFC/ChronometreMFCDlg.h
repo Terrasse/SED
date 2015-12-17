@@ -34,12 +34,6 @@ protected:
 #endif
 	DECLARE_MESSAGE_MAP()
 public:
-	
-	//int v_heure;
-	//int v_minute;
-	//int v_seconde;
-	//int v_ms;
-	bool maxtour;
 	CWnd m_sText;
 	CWnd m_bRestart;
 	CWnd m_bStop;
@@ -56,5 +50,6 @@ public:
 	afx_msg void OnEnChangeEdit6();
 	afx_msg void OnBnClickedButton4();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnStnClickedStatic0();
 };
 

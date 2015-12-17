@@ -164,6 +164,8 @@ string Heure::formatShort(){
 		ret = s + "s " + ms+"ms";
 	}else if(Heure::milliseconde>0){
 		ret = ms+"ms";
+	}else{
+		ret = "00m 00s 000ms";
 	}
 
 	return ret;

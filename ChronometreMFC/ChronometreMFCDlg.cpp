@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(CChronometreMFCDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON2, &CChronometreMFCDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON4, &CChronometreMFCDlg::OnBnClickedButton4)
 	ON_WM_TIMER()
+	ON_STN_CLICKED(IDC_STATIC0, &CChronometreMFCDlg::OnStnClickedStatic0)
 END_MESSAGE_MAP()
 
 
@@ -84,7 +85,6 @@ void CChronometreMFCDlg::OnBnClickedButton1()
 {
 	v_parcours->stop();
 	v_parcours = new Parcours();
-	CChronometreMFCDlg::maxtour = FALSE;
 	m_listBox.ResetContent();
 
 	
@@ -116,6 +116,9 @@ void CChronometreMFCDlg::OnBnClickedButton2()
 	v_parcours->stop();
 
 	
+	m_bRestart.ShowWindow(SW_SHOW);
+	m_bRestart.EnableWindow(TRUE);
+
 	// on deblocker le bouton start
 	m_bStart.EnableWindow(TRUE);
 	
@@ -138,11 +141,11 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 	if(v_parcours == NULL)
 		v_parcours = new Parcours();
 	v_parcours->start();
-	CChronometreMFCDlg::maxtour = FALSE;
 
 
 	// on affiche le boutton restart
-	m_bRestart.ShowWindow(SW_SHOW);
+	m_bRestart.ShowWindow(FALSE);
+	m_bRestart.EnableWindow(FALSE);
 	
 	// on blocker le bouton start
 	m_bStart.EnableWindow(FALSE);
@@ -175,13 +178,7 @@ void CChronometreMFCDlg::OnBnClickedButton4()
 	wstring str;
 	string etape = v_parcours->getLastEtape();
 	str.assign(etape.begin(), etape.end());
-	if(v_parcours->getNbTours() <= Parcours::getMaxTours() && !CChronometreMFCDlg::maxtour){
-		m_listBox.InsertString(0,str.c_str());
-		CChronometreMFCDlg::maxtour = v_parcours->getNbTours() == Parcours::getMaxTours();
-	}else{
-		m_listBox.DeleteString(0);
-		m_listBox.InsertString(0,str.c_str());
-	}
+	m_listBox.InsertString(0,str.c_str());
 	UpdateData(FALSE);
 }
 
@@ -194,4 +191,9 @@ void CChronometreMFCDlg::OnTimer(UINT_PTR nIDEvent)
 	if(v_parcours != NULL){
 		doUpdate();
 	}
+}
+
+void CChronometreMFCDlg::OnStnClickedStatic0()
+{
+	// TODO: Add your control notification handler code here
 }
