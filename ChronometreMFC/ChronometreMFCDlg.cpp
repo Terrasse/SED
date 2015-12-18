@@ -57,7 +57,7 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 	GPS *gps=new GPS();
 	v_parcours = new Parcours(c,gps);
 	//Le timer se déclenche toutes les 10ms voir onTimer pour le catch de l'event
-	SetTimer(1, 25, NULL);
+	SetTimer(1, 100, NULL);
 
 	return TRUE;  // retourne TRUE, sauf si vous avez défini le focus sur un contrôle
 }

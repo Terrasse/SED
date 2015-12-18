@@ -69,6 +69,7 @@ public:
 		dist = dist * RAYON_TERRE;
 		return dist;
 	}
+
 	static double deg2rad(double deg) {
 		return (deg * PI / 180);
 	}

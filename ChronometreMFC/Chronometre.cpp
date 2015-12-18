@@ -1,6 +1,6 @@
-#include "stdafx.h"
+ #include "stdafx.h"
 #include "Chronometre.h"
-#define FREQUENCE_RAF 20
+#define FREQUENCE_RAF 25
 
 	Chronometre::Chronometre(){
 		_tick_count_start = 0;
