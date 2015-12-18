@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Position.h"
 	
+	Position::Position(Position* pos){
+		Position::longitude=pos->getLongitude();
+		Position::latitude=pos->getLatitude();
+	};
 	Position::Position(double longitude, double latitude){
 		Position::longitude=longitude;
 		Position::latitude=latitude;

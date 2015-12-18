@@ -6,10 +6,10 @@ Parcours::Parcours(Chronometre *chrono, GPS *gps){
 	Parcours::etape = NULL;
 	Parcours::c = chrono;
 	Parcours::gps = gps;
+	Parcours::gps->start();
 };
 
 void Parcours::start(){
-	gps->start();
 	c->start();
 	Parcours::origine = gps->getPosition();
 	//TODO : Gestion du GPS
@@ -30,8 +30,10 @@ void Parcours::tour(){
 	//Création d'un nouvelle étape
 		//Parcours::current++;
 		Etape* nouvelle = new Etape();
-		nouvelle->heure = c->getCurrentTime();
-		nouvelle->position = gps->getPosition();
+		Heure * newheure = new Heure(c->getCurrentTime());
+		nouvelle->heure = newheure;
+		Position * newPos = new Position(gps->getPosition());
+		nouvelle->position = newPos;
 		if ( Parcours::etape != NULL){
 			nouvelle->tour=Parcours::etape->tour + 1 ;
 			nouvelle->terry=Parcours::etape;
@@ -50,6 +52,9 @@ void Parcours::reset(){
 
 Chronometre* Parcours::getChronometre(){
 	return Parcours::c;
+};
+GPS* Parcours::getGPS(){
+	return Parcours::gps;
 };
 
 int Parcours::getNbTours(){

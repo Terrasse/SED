@@ -2,6 +2,14 @@
 #include "Heure.h"
 
 //Constructeur de la classe heure 
+
+
+Heure::Heure(Heure* newheure){
+	milliseconde = newheure->getMilliseconde();
+	seconde =  newheure->getSeconde();
+	minute =  newheure->getMinute();
+	heure =  newheure->getHeure();
+};
 Heure::Heure(){
 	milliseconde = 0;
 	seconde = 0;

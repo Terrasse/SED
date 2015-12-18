@@ -17,6 +17,7 @@ private:
 
 public:
 	
+	Position(Position* pos);
 	Position(double longitude,double lalitude);
 
 	// modification des attributs
@@ -35,37 +36,38 @@ public:
 		ostringstream oss;
 		string ret;
 		double round;
-		int dist ;
+		double dist ;
 		dist = Position::calculDistance(p1,p2);
-			printf("%d\t",dist);
 		if(dist>1000000){
-			printf("1\n");
 			dist = (int)(dist / 1000);
 			oss << dist << "km" ;
 		}else if(dist>1000){
-			printf("2\n");
 			dist = (int)(dist / 10);
 			round = dist / 100.0;
 			oss << round << "km" ;
+		}else if(dist<1){
+			dist = ((int)(dist *1000))/100.0;
+			oss << dist << "cm" ;
 		}else{
-			printf("3\n");
+			
+			dist = ((int)(dist *10))/10.0;
 			oss << dist << "m" ;
 		}
 		ret = oss.str();
 		return ret;
 	}
 
-	static int calculDistance(Position * p1 , Position * p2){
+	static double calculDistance(Position * p1 , Position * p2){
 		return Position::distance(p1->getLatitude(),p1->getLongitude(),p2->getLatitude(),p2->getLongitude());
 	}
 
-	static int distance(double lat1, double lon1, double lat2, double lon2){
+	static double distance(double lat1, double lon1, double lat2, double lon2){
 		double theta, dist;
 		theta = lon1 - lon2;
 		dist = sin(Position::deg2rad(lat1)) * sin(Position::deg2rad(lat2)) + cos(Position::deg2rad(lat1)) * cos(Position::deg2rad(lat2)) * cos(Position::deg2rad(theta));
 		dist = acos(dist);
 		dist = dist * RAYON_TERRE;
-		return (int)dist;
+		return dist;
 	}
 	static double deg2rad(double deg) {
 		return (deg * PI / 180);

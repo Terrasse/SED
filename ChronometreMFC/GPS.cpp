@@ -26,7 +26,7 @@ Position* GPS::getPosition(){
 void GPS::setPosition(double newLongitude, double newLatitude){		
 	DWORD dwWaitResult=WaitForSingleObject(mu_position,INFINITE);
 	if(newLongitude != 0 && newLatitude != 0) {
-		Position* p=new Position(newLongitude,newLatitude);
+		_position = new Position(newLongitude,newLatitude);
 	}
 	ReleaseMutex(mu_position);
 }
@@ -76,7 +76,9 @@ UINT UpdateCurrentPosition(LPVOID pParam){
 			case ON: 
 				
 				GPSGetPosition(gps->m_hGPS_Device, &gps_Position, MAX_AGE, 0);
+				printf("lat%d\n",gps_Position.dblLatitude);
 				gps->setPosition(gps_Position.dblLongitude,gps_Position.dblLatitude);
+				printf("lat%d\n",gps->getPosition()->getLatitude());
 				break;
 			case OFF:
 				break;

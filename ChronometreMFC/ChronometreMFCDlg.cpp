@@ -57,7 +57,7 @@ BOOL CChronometreMFCDlg::OnInitDialog()
 	GPS *gps=new GPS();
 	v_parcours = new Parcours(c,gps);
 	//Le timer se déclenche toutes les 10ms voir onTimer pour le catch de l'event
-	SetTimer(1, 21, NULL);
+	SetTimer(1, 25, NULL);
 
 	return TRUE;  // retourne TRUE, sauf si vous avez défini le focus sur un contrôle
 }
@@ -149,9 +149,10 @@ void CChronometreMFCDlg::OnBnClickedButton3()
 void CChronometreMFCDlg::doUpdate()
 {
 	Chronometre* v_chrono = v_parcours->getChronometre();
+	GPS* v_gps = v_parcours->getGPS();
 	if (v_chrono!=NULL) {	
 		wstring str;
-		string time = v_chrono->getCurrentTime()->formatShort();
+		string time = v_chrono->getCurrentTime()->formatShort() + " - " + v_gps->getPosition()->toString();
 		str.assign(time.begin(), time.end());
 		m_sText.SetWindowText(str.c_str());
 	} 

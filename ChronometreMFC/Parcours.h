@@ -28,6 +28,7 @@ public :
 	void tour();
 	void reset();
 	Chronometre* getChronometre();
+	GPS* getGPS();
 	
 	//Permet de récupérer la dernière étape 
 	string getLastEtape();
